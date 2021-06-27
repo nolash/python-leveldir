@@ -18,14 +18,14 @@ class NumDirTest(unittest.TestCase):
 
     def setUp(self):
         self.dir = tempfile.mkdtemp() 
-        self.numdir = NumDir(os.path.join(self.dir, 'n'), [1000, 100])
-        logg.debug('setup numdir root {}'.format(self.dir))
 
 #    def tearDown(self):
 #        shutil.rmtree(self.dir)
 #        logg.debug('cleaned numdir root {}'.format(self.dir))
 
     def test_path(self):
+        self.numdir = NumDir(os.path.join(self.dir, 'n'), [1000, 100])
+        logg.debug('setup numdir root {}'.format(self.dir))
         path = self.numdir.to_filepath(1337)
         path_parts = []
         logg.debug(path)
@@ -36,6 +36,13 @@ class NumDirTest(unittest.TestCase):
         self.assertEqual(two, '300')
         self.assertEqual(one, '1000')
 
+
+    def test_invalid_thresholds(self):
+        with self.assertRaises(ValueError):
+            self.numdir = NumDir(os.path.join(self.dir, 'n'), [100, 1000])
+
+        with self.assertRaises(ValueError):
+            self.numdir = NumDir(os.path.join(self.dir, 'n'), [])
 
 
 
