@@ -8,7 +8,6 @@ import os
 # local imports
 from leveldir.numeric import NumDir
 
-
 logging.basicConfig(level=logging.DEBUG)
 logg = logging.getLogger()
 
@@ -46,6 +45,30 @@ class NumDirTest(unittest.TestCase):
         with self.assertRaises(ValueError):
             self.numdir = NumDir(os.path.join(self.dir, 'n'), [])
 
+
+    def test_single_level(self):
+        self.numdir = NumDir(os.path.join(self.dir, 'n'), [1000])
+        b = os.urandom(32)
+        self.numdir.add(1337, b)
+        b = os.urandom(32)
+        self.numdir.add(666, b)
+        b = os.urandom(32)
+        self.numdir.add(100000, b)
+
+        self.assertEqual(self.numdir.count(), 3)
+
+
+    def test_multilevel(self):
+        logg.debug('using dir {}'.format(self.dir))
+        self.numdir = NumDir(os.path.join(self.dir, 'n'), [1000, 100, 10])
+        b = os.urandom(32)
+        self.numdir.add(1337, b)
+        b = os.urandom(32)
+        self.numdir.add(666, b)
+        b = os.urandom(32)
+        self.numdir.add(100000, b)
+
+        self.assertEqual(self.numdir.count(), 3)
 
 
 if __name__ == '__main__':

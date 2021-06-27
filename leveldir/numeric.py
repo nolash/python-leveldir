@@ -44,10 +44,14 @@ class NumDir(LevelDir):
 
 
     def add(self, n, content, prefix=b''):
-        path = to_filepath(n)
+        path = self.to_filepath(n)
+
+        os.makedirs(os.path.dirname(path), exist_ok=True)
+
         f = open(path, 'wb')
         f.write(content)
+        f.close()
 
         f = open(self.master_file, 'ab')
-        f.write(n.to_bytes(8, byteorder('big')))
+        f.write(n.to_bytes(8, byteorder='big'))
         f.close()
