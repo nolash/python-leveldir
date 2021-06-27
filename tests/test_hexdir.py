@@ -6,7 +6,7 @@ import logging
 import os
 
 # local imports
-from hexdir import HexDir
+from hexdir.hex import HexDir
 
 logging.basicConfig(level=logging.DEBUG)
 logg = logging.getLogger()
@@ -29,8 +29,10 @@ class HexDirTest(unittest.TestCase):
         content = b'cdef'
         prefix = b'ab'
         label = b'\xde\xad\xbe\xef'
-        self.hexdir.add(label, content, prefix=prefix)
+        (c, entry_path) = self.hexdir.add(label, content, prefix=prefix)
+        
         file_path = os.path.join(self.dir, 'q', 'DE', 'AD', 'BE', label.hex().upper())
+        self.assertEqual(file_path, entry_path)
         
         f = open(file_path, 'rb')
         r = f.read()
@@ -54,7 +56,7 @@ class HexDirTest(unittest.TestCase):
     def test_index(self):
         self.hexdir.add(b'\xde\xad\xbe\xef', b'foo', b'ab')
         self.hexdir.add(b'\xbe\xef\xfe\xed', b'bar', b'cd')
-        c = self.hexdir.add(b'\x01\x02\x03\x04', b'baz', b'ef')
+        (c, entry_path) = self.hexdir.add(b'\x01\x02\x03\x04', b'baz', b'ef')
         self.assertEqual(c, 2)
 
 
