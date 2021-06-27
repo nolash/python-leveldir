@@ -30,10 +30,12 @@ class NumDir(LevelDir):
         c = n 
         x = 0
         d = []
+        v = 0
         for t in self.thresholds:
             x = math.floor(c / t)
             y = x * t
-            d.append(str(y))
+            v += y
+            d.append(str(v))
             c -= y
         return os.path.join(self.path, *d) 
       

@@ -1,3 +1,5 @@
+- 0.0.2
+	* make subdir values cumulative in numdir
 - 0.0.1
 	* add hexdir
 	* add numdir

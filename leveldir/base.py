@@ -1,5 +1,6 @@
 # standard imports
 import os
+import stat
 
 
 class LevelDir:
@@ -15,6 +16,16 @@ class LevelDir:
         except FileNotFoundError:
             LevelDir.__prepare_directory(self.path)
         self.master_file = os.path.join(self.path, 'master')
+
+
+    def __verify_directory(self):
+        fi = os.stat(self.path)
+        if not stat.S_ISDIR(fi.st_mode):
+            raise ValueError('{} is not a directory'.format(self.path))
+        #f = os.listdir(self.path)
+        #os.listdir(self.path)
+        #f.close()
+        return True
 
 
     def count(self):

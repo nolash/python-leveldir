@@ -34,7 +34,7 @@ class NumDirTest(unittest.TestCase):
         (path, two) = os.path.split(path)
         (path, one) = os.path.split(path)
         self.assertEqual(three, '1337')
-        self.assertEqual(two, '300')
+        self.assertEqual(two, '1300')
         self.assertEqual(one, '1000')
 
 
@@ -59,7 +59,6 @@ class NumDirTest(unittest.TestCase):
 
 
     def test_multilevel(self):
-        logg.debug('using dir {}'.format(self.dir))
         self.numdir = NumDir(os.path.join(self.dir, 'n'), [1000, 100, 10])
         b = os.urandom(32)
         self.numdir.add(1337, b)

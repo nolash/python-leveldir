@@ -1,6 +1,5 @@
 # standard imports
 import os
-import stat
 import logging
 
 # external imports
@@ -97,16 +96,6 @@ class HexDir(LevelDir):
         dir_path = self.to_dirpath(hx)
         file_path = os.path.join(dir_path, hx.upper())
         return file_path
-
-
-    def __verify_directory(self):
-        fi = stat(self.path)
-        if not stat.S_ISDIR(fi.st_mode):
-            raise ValueError('{} is not a directory'.format(self.path))
-        #f = os.listdir(self.path)
-        #os.listdir(self.path)
-        #f.close()
-        return True
 
 
     @staticmethod
