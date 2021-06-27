@@ -6,7 +6,7 @@ import logging
 import os
 
 # local imports
-from hexdir.numeric import NumDir
+from leveldir.numeric import NumDir
 
 
 logging.basicConfig(level=logging.DEBUG)
@@ -19,9 +19,11 @@ class NumDirTest(unittest.TestCase):
     def setUp(self):
         self.dir = tempfile.mkdtemp() 
 
-#    def tearDown(self):
-#        shutil.rmtree(self.dir)
-#        logg.debug('cleaned numdir root {}'.format(self.dir))
+
+    def tearDown(self):
+        shutil.rmtree(self.dir)
+        logg.debug('cleaned numdir root {}'.format(self.dir))
+
 
     def test_path(self):
         self.numdir = NumDir(os.path.join(self.dir, 'n'), [1000, 100])

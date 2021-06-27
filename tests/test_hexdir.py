@@ -6,7 +6,7 @@ import logging
 import os
 
 # local imports
-from hexdir.hex import HexDir
+from leveldir.hex import HexDir
 
 logging.basicConfig(level=logging.DEBUG)
 logg = logging.getLogger()
