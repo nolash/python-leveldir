@@ -1,9 +1,12 @@
 # standard imports
 import math
 import os
+import logging
 
 # local imports
 from .base import LevelDir
+
+logg = logging.getLogger(__name__)
 
 
 class NumDir(LevelDir):
@@ -46,14 +49,18 @@ class NumDir(LevelDir):
 
 
     def add(self, n, content, prefix=b''):
-        path = self.to_filepath(n)
+        entry_path = self.to_filepath(n)
 
-        os.makedirs(os.path.dirname(path), exist_ok=True)
+        os.makedirs(os.path.dirname(entry_path), exist_ok=True)
 
-        f = open(path, 'wb')
+        f = open(entry_path, 'wb')
         f.write(content)
         f.close()
 
         f = open(self.master_file, 'ab')
         f.write(n.to_bytes(8, byteorder='big'))
         f.close()
+
+        c = self.count()
+
+        logg.debug('created new numdir entry {} idx {} in {}'.format(str(n), c, entry_path)) 

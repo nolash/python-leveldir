@@ -48,7 +48,7 @@ class HexDir(LevelDir):
         f.write(key)
         f.close()
 
-        logg.info('created new entry {} idx {} in {}'.format(key_hex, c, entry_path)) 
+        logg.debug('created new hexdir entry {} idx {} in {}'.format(key_hex, c, entry_path)) 
     
         return (c, entry_path)
 
