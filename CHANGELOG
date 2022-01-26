@@ -1,3 +1,8 @@
+- 0.1.1
+	* Add subdirectory entry mode for hexdir
+	* Add custom hex formatting for path generation
+- 0.1.0 
+	* License change to WTFPL
 - 0.0.2
 	* make subdir values cumulative in numdir
 - 0.0.1

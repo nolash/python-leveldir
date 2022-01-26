@@ -82,5 +82,22 @@ class HexDirTest(unittest.TestCase):
         self.assertEqual(b'cd', prefix)
 
 
+class HexDirTestFormatter(unittest.TestCase):
+
+    def setUp(self):
+        def lower_formatter(hx):
+            return hx.lower()
+        self.dir = tempfile.mkdtemp() 
+        self.hexdir = HexDir(os.path.join(self.dir, 'q'), 4, 3, 2, formatter=lower_formatter)
+        logg.debug('setup hexdir root {}'.format(self.dir))
+
+
+    def test_format(self):
+        self.hexdir.add(b'\xaa\xbb\xcc\xdd', b'foo', b'ab')
+        (prefix, key) = self.hexdir.get(1)
+        checkdir_path = os.path.join(self.hexdir.path, 'aa', 'bb', 'cc', 'aabbccdd')
+        os.stat(checkdir_path)
+        
+
 if __name__ == '__main__':
     unittest.main()

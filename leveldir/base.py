@@ -10,12 +10,20 @@ class LevelDir:
         self.levels = levels 
         self.entry_length = entry_length
         fi = None
-        try:
-            fi = os.stat(self.path)
-            self.__verify_directory()
-        except FileNotFoundError:
-            LevelDir.__prepare_directory(self.path)
+        self.__prepare_directory(self.path)
+
+        self.__verify_directory()
+
         self.master_file = os.path.join(self.path, 'master')
+
+
+    def have(self, k):
+        fp = self.to_filepath(k)
+        try:
+            os.stat(fp)
+        except FileNotFoundError:
+            return False
+        return True
 
 
     def __verify_directory(self):
@@ -37,9 +45,13 @@ class LevelDir:
         return r
 
 
-    @staticmethod
-    def __prepare_directory(path):
+    @classmethod
+    def __prepare_directory(cls, path):
         os.makedirs(path, exist_ok=True)
         state_file = os.path.join(path, 'master')
-        f = open(state_file, 'w')
-        f.close()
+        try:
+            os.stat(state_file)
+        except FileNotFoundError:
+            f = open(state_file, 'w')
+            f.close()
+        return state_file

@@ -34,6 +34,7 @@ class NumDir(LevelDir):
         x = 0
         d = []
         v = 0
+        logg.debug('dirpath {}'.format(n))
         for t in self.thresholds:
             x = math.floor(c / t)
             y = x * t
