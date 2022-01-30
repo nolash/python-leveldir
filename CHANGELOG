@@ -1,3 +1,5 @@
+- 0.3.0
+	* Make master file a dotfile
 - 0.2.0
 	* Add subdirectory entry mode for hexdir
 	* Add custom hex formatting for path generation

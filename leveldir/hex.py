@@ -97,7 +97,7 @@ class HexDir(LevelDir):
         prefix = f.read(self.prefix_length)
         key = f.read(self.key_length)
         f.close()
-        return (prefix, key) 
+        return (prefix, key)
 
 
     def to_subpath(self, hx):

@@ -14,7 +14,7 @@ class LevelDir:
 
         self.__verify_directory()
 
-        self.master_file = os.path.join(self.path, 'master')
+        self.master_file = os.path.join(self.path, '.master')
 
 
     def have(self, k):
@@ -48,7 +48,7 @@ class LevelDir:
     @classmethod
     def __prepare_directory(cls, path):
         os.makedirs(path, exist_ok=True)
-        state_file = os.path.join(path, 'master')
+        state_file = os.path.join(path, '.master')
         try:
             os.stat(state_file)
         except FileNotFoundError:
