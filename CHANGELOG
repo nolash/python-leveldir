@@ -1,3 +1,5 @@
+- 0.3.1
+	* Include dependency in packaging 
 - 0.3.0
 	* Make master file a dotfile
 - 0.2.0
