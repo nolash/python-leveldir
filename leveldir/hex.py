@@ -41,7 +41,7 @@ class HexDir(LevelDir):
 
     def add(self, key, content, prefix=b''):
         self.__check(key, content, prefix)
-        key_hex = key.hex()
+        key_hex = self.key_to_string(key)
         entry_path = self.to_filepath(key_hex)
         return self.__add(entry_path, key, content, key_hex, prefix=prefix)
 
@@ -65,9 +65,13 @@ class HexDir(LevelDir):
         return (c, entry_path)
 
 
+    def key_to_string(self, k):
+        return k.hex() 
+       
+    
     def add_dir(self, file_key, key, content, prefix=b''):
         self.__check(key, content, prefix)
-        key_hex = key.hex()
+        key_hex = self.key_to_string(key)
         entry_path = self.to_filepath(key_hex)
         entry_path = os.path.join(entry_path, file_key)
         return self.__add(entry_path, key, content, key_hex, prefix=prefix)
@@ -92,6 +96,7 @@ class HexDir(LevelDir):
 
     def get(self, idx):
         cursor = self.__cursor(idx)
+        print('cursor {}'.format(cursor))
         f = open(self.master_file, 'rb')
         f.seek(cursor)
         prefix = f.read(self.prefix_length)

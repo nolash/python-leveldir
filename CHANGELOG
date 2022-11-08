@@ -1,5 +1,6 @@
 - 0.3.1
-	* Include dependency in packaging 
+	* Include dependency in packaging
+	* Allow overridable key string representation
 - 0.3.0
 	* Make master file a dotfile
 - 0.2.0
